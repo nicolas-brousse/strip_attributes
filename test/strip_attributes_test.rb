@@ -423,5 +423,10 @@ class StripAttributesTest < Minitest::Test
       assert_equal "foo", StripAttributes.strip("\u200A\u200B foo\u200A\u200B ")
       assert_equal "foo\u20AC".force_encoding("ASCII-8BIT"), StripAttributes.strip("foo\u20AC ".force_encoding("ASCII-8BIT"))
     end
+
+    def test_should_strip_array_with_empty_values
+      array = [nil, "", "value", " abc "]
+      assert_equal ["value", "abc"], StripAttributes.strip(array)
+    end
   end
 end

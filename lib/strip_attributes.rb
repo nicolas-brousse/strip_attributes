@@ -51,6 +51,7 @@ module StripAttributes
   end
 
   def self.strip_string(value, options = {})
+    return value.map { |v| strip_string(v, options) }.compact if value.is_a?(Array)
     return value unless value.is_a?(String)
 
     allow_empty      = options[:allow_empty]
